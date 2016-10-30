@@ -13,7 +13,8 @@ router.use(function(req,res,next){
 });
 
 router.get('/', function(req, res, next) {
-  	res.render('index', { title: 'Express' });
+  	res.render('index');
+  	//res.send('first index page!');
 });
 
 router.get('/second/', function(req, res, next){
