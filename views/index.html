@@ -7,7 +7,9 @@
     <link rel="stylesheet" href="css/bootstrap-datetimepicker.css">
     <link rel="stylesheet" href="css/style.css">
   </head>
-  <body>
+  <!--<body ng-app="app" ng-init="name={id:1,name:'leslie'}">-->
+  <!-- ng-init not used frequently-->
+  <body ng-app="app" ng-controller="login">
     <div id="navbar">
         <nav>
             <a href="index.asp">Home</a>
@@ -16,12 +18,18 @@
         </nav>
     </div>
     <div id="welocome"><p>WElCOME</p></div>
-    <div id="login" ng-app="" ng-init="name={id:1,name:'leslie'}">
+    <div id="login">
  	<!--<p>我的第一个表达式: {{ 5 + 5 }}</p>-->
- 	<input type="text" ng-model="name.name"/>
- 	<p>{{name.name}}</p>
+ 	<form>
+ 	    <input type="text" name="username" ng-model="username" placeholder="用户名" required/><br>
+ 	    <input type="password" name="password" ng-model="password" placeholder="密码" required/><br>
+ 	    <input type="submit" value="Login" >
+ 	    <a href="sign up">注册</a>
+ 	</form>
+ 	<p>{{username}}</p>
     </div>
     <div id="wrapper"><p>wrapper</p></div>
-    <script src="javascripts/angularjs/angular.min.js"></script>
+    <script src="javascripts/angularjs/angular.js"></script>
+    <script src="javascripts/controller/app.js"></script>
   </body>
 </html>
