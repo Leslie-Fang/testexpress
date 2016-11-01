@@ -1,13 +1,27 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Index</title>
+    <meta charset="utf-8">
+    <title>Log In</title>
+    <link rel="stylesheet" href="css/bootstrap3.0.0.css">
+    <link rel="stylesheet" href="css/bootstrap-datetimepicker.css">
+    <link rel="stylesheet" href="css/style.css">
   </head>
   <body>
-    <p>index page</p>
-    <div ng-app="a">
- 	<p>我的第一个表达式: {{ 5 + 5 }}</p>
+    <div id="navbar">
+        <nav>
+            <a href="index.asp">Home</a>
+            <a href="html5_meter.asp">Previous</a>
+            <a href="html5_noscript.asp">Next</a>
+        </nav>
     </div>
+    <div id="welocome"><p>WElCOME</p></div>
+    <div id="login" ng-app="" ng-init="name={id:1,name:'leslie'}">
+ 	<!--<p>我的第一个表达式: {{ 5 + 5 }}</p>-->
+ 	<input type="text" ng-model="name.name"/>
+ 	<p>{{name.name}}</p>
+    </div>
+    <div id="wrapper"><p>wrapper</p></div>
     <script src="javascripts/angularjs/angular.min.js"></script>
   </body>
 </html>
