@@ -1,6 +1,6 @@
 var app = angular.module("first", []);
 app.controller('login', function($scope,$http) {
-    $scope.username = "John";
+    $scope.copy_username = "游客";
     $scope.loginstate='no';
     $scope.send=function(username,password) {
         $http({
@@ -13,6 +13,7 @@ app.controller('login', function($scope,$http) {
         }).success(function(data) {
                if(data.state){
                    $scope.loginstate='yes';
+                   $scope.copy_username = $scope.username;
                    //$scope.username=data.username;
                }else {
                     alert("用户名或密码错误！");
