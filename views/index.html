@@ -9,7 +9,7 @@
   </head>
   <!--<body ng-app="app" ng-init="name={id:1,name:'leslie'}">-->
   <!-- ng-init not used frequently-->
-  <body ng-app="app" ng-controller="login">
+  <body ng-app="first">
     <div id="navbar">
         <nav>
             <a href="index.asp">Home</a>
@@ -18,18 +18,19 @@
         </nav>
     </div>
     <div id="welocome"><p>WElCOME</p></div>
-    <div id="login">
- 	<!--<p>我的第一个表达式: {{ 5 + 5 }}</p>-->
- 	<form>
- 	    <input type="text" name="username" ng-model="username" placeholder="用户名" required/><br>
- 	    <input type="password" name="password" ng-model="password" placeholder="密码" required/><br>
- 	    <input type="submit" value="Login" >
- 	    <a href="sign up">注册</a>
- 	</form>
- 	<p>{{username}}</p>
+    <div id="login" ng-controller="login">
+ 	    <form ng-submit="send(username,password);" role="form">
+ 	      <input type="text" name="username" ng-model="username" placeholder="用户名" required/><br>
+ 	      <input type="password" name="password" ng-model="password" placeholder="密码" required/><br>
+ 	      <input type="submit" value="Login" >
+ 	      <a href="sign up">注册</a>
+ 	    </form>
+ 	    <p>{{username}}</p>
+      <p ng-model="loginstate">{{loginstate}}<p>
     </div>
     <div id="wrapper"><p>wrapper</p></div>
     <script src="javascripts/angularjs/angular.js"></script>
     <script src="javascripts/controller/app.js"></script>
+    <script src="javascripts/controller/logandreg.js"></script>
   </body>
 </html>

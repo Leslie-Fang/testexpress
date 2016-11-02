@@ -3,8 +3,7 @@ var router = express.Router();
 var multiparty = require('multiparty');
 var util = require('util');
 var fs = require('fs');
-var mysql=require('mysql');
-
+var my=require('../database/mysql_api')
 /* GET home page. */
 router.use(function(req,res,next){
 	console.log("welcome!");
@@ -40,20 +39,15 @@ router.post('/uploadimage/',function(req, res, next){
 });
 
 router.get('/mysqltest/',function(req, res, next){
-	var connection = mysql.createConnection({
-	  host     : 'localhost',
-	  user     : 'sampadm',
-	  password : 'secret',
-	  database : 'sampdb'
-	});
-	connection.connect();
-
-	connection.query('insert into express(id,name) values(2,\'bob\')', function(err, rows, fields) {
-	  if (err) throw err;
-	 // console.log('The solution is: ', rows[0].solution);
-	});
-
-	connection.end();
+    my.createone();
+    res.send('create successfully!');
 });
+
+router.post('/login/', function(req, res) {
+    console.log(req.param('username'));
+    console.log(req.param('password'));
+    my.login(req,res);
+   //res.send('login successfully!');
+  });
 
 module.exports = router;
