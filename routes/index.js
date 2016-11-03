@@ -16,6 +16,11 @@ router.get('/', function(req, res, next) {
   	//res.send('first index page!');
 });
 
+router.get('/sign_up', function(req, res, next) {
+    res.render('signup');
+    //res.send('first index page!');
+});
+
 router.get('/second/', function(req, res, next){
 	console.log('Request Type:', req.method);
 	next();
@@ -47,6 +52,13 @@ router.post('/login/', function(req, res) {
     console.log(req.param('username'));
     console.log(req.param('password'));
     my.login(req,res);
+   //res.send('login successfully!');
+  });
+
+router.post('/signup/', function(req, res) {
+    console.log(req.param('username'));
+    console.log(req.param('password'));
+    my.signup(req,res);
    //res.send('login successfully!');
   });
 

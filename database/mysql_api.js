@@ -45,3 +45,23 @@ exports.login=function(req, res){
 	});
 	connection.end();
 }
+
+exports.signup=function(req, res){
+	var sql='insert into user(username,password) values(?,?)';
+	var data=[req.param('username'),req.param('password')];
+	var connection = mysql.createConnection(config);
+	connection.connect();
+	connection.query(sql,data,function (err,result) {
+		//var user=result[0];
+		var response={state:false};
+        if(result!=null){
+			console.log('successfully!');
+			response.state=true;
+		//	req.session={id:result.insertId,loginid:req.param('username')};
+		//	response.id=result.insertId;
+		//	response.loginid=req.param('username');			
+		}
+		res.json(response);
+	});
+	connection.end();
+}

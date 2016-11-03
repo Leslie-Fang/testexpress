@@ -1,10 +1,8 @@
-var app = angular.module("first", []);
-app.controller('login', function($scope,$http) {
-    $scope.copy_username = "游客";
-    $scope.loginstate='no';
-    $scope.send=function(username,password) {
+var app = angular.module("signup", []);
+app.controller('regist', function($scope,$http) {
+	$scope.send=function(username,password) {
         $http({
-            url:'/login',
+            url:'/signup',
             method:'post',
             data:{
                 username	:	username,
@@ -13,17 +11,12 @@ app.controller('login', function($scope,$http) {
         }).success(function(data) {
                if(data.state){
                    $scope.loginstate='yes';
-                   $scope.copy_username = $scope.username;
                    //$scope.username=data.username;
                }else {
-                    alert("用户名或密码错误！");
+                    alert("注册失败!");
                 }
               //  window.location="/#/view/manage"
                // location.reload();
             });
     }
-    
-});
-
-
-//document.write('<script src="javascripts/controller/logandreg.js"></script>');
+	});
