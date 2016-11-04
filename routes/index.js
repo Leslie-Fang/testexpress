@@ -16,6 +16,11 @@ router.get('/', function(req, res, next) {
   	//res.send('first index page!');
 });
 
+router.get('/main', function(req, res, next) {
+    res.render('main');
+    //res.send('first index page!');
+});
+
 router.get('/sign_up', function(req, res, next) {
     res.render('signup');
     //res.send('first index page!');

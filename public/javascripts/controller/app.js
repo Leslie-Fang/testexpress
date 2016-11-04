@@ -15,7 +15,7 @@ app.controller('login', function($scope,$http) {
                    //$scope.loginstate='hi,'+$scope.username;
                    $scope.copy_username = $scope.username;
 				  // window.location = "http://www.baidu.com";//successfully, nav to a outside web page
-				    window.location="/upload";//successfully nav to a page in the project
+				    window.location="/main";//successfully nav to a page in the project
                    //$scope.username=data.username;
                }else {
                     alert("用户名或密码错误！");
