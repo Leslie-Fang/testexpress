@@ -3,17 +3,77 @@ var router = express.Router();
 var multiparty = require('multiparty');
 var util = require('util');
 var fs = require('fs');
-var my=require('../database/mysql_api')
+var my=require('../database/mysql_api');
+var cookieParser = require('cookie-parser');
+var users = require('./users');
+var get = require('./get');
 /* GET home page. */
+//basic router, here every request would pass this router
+
+router.use('/users', users);
+router.use('/get', get);
 router.use(function(req,res,next){
 	console.log("welcome!");
 	console.log('Time:', Date.now());
-	next();
+  console.log('%s',req.method);
+  //console.log(req.Type());
+  if(req.method == 'GET'){
+        console.log('11111');
+        //if cookies expire, cookies would clear
+        if(req.cookies.username == null){
+          //if username is null,not login yet 
+          //must visit the login page
+          res.render('index');
+        }else{
+          //everytime user give a request
+          //reset the expire time of the cookies
+          //res.cookie('', req.param('username'));
+          //if login,do something continue
+          console.log(req.cookies);
+          //set the cookies again to avoid expire
+          res.cookie('username', req.cookies.username,{maxAge: 60*1000});
+          next();
+      }
+  }
+  else{
+    next();};
+  /*
+  if(req.cookies.isVisit){
+    console.log(req.cookies);
+  }
+  else{
+    res.cookie('isVisit', 1, {maxAge: 60 * 1000});
+  }*/
+  /*
+  if(req.cookies.username == null){
+    //if username is null,not login yet 
+    //must visit the login page
+    res.render('index');
+  }else{
+    //everytime user give a request
+    //reset the expire time of the cookies
+    //res.cookie('', req.param('username'));
+    //if login,do something continue
+    console.log(req.cookies);
+    next();
+  }*/
+  /*
+  // 检查 session 中的 isVisit 字段
+  // 如果存在则增加一次，否则为 session 设置 isVisit 字段，并初始化为 1。
+  if(req.session.isVisit) {
+    req.session.isVisit++;
+    console.log(req.session);
+   // res.send('<p>第 ' + req.session.isVisit + '次来此页面</p>');
+  } else {
+    req.session.isVisit = 1;
+   // res.send("欢迎第一次来这里");
+    console.log(req.session);
+  }*/
 });
 
 router.get('/', function(req, res, next) {
-  	res.render('index');
-  	//res.send('first index page!');
+    res.render('index');
+    //res.send('first index page!');
 });
 
 router.get('/main', function(req, res, next) {
@@ -27,14 +87,19 @@ router.get('/sign_up', function(req, res, next) {
 });
 
 router.get('/second/', function(req, res, next){
-	console.log('Request Type:', req.method);
-	next();
-	},function(req, res, next) {
-	res.send('second page!');
+  console.log('Request Type:', req.method);
+  next();
+  },function(req, res, next) {
+  res.send('second page!');
 });
 
 router.get('/upload/',function(req, res, next){
-	res.render('upload');
+  res.render('upload');
+});
+
+router.get('/mysqltest/',function(req, res, next){
+    my.createone();
+    res.send('create successfully!');
 });
 
 router.post('/uploadimage/',function(req, res, next){
@@ -46,11 +111,6 @@ router.post('/uploadimage/',function(req, res, next){
       res.write('received upload:\n\n');
       res.end(util.inspect({fields: fields, files: files}));
     });
-});
-
-router.get('/mysqltest/',function(req, res, next){
-    my.createone();
-    res.send('create successfully!');
 });
 
 router.post('/login/', function(req, res) {
