@@ -18,7 +18,7 @@
   </div>-->
   <body class="wrapper" ng-app="first" ng-controller="login">
     <h1>WElCOME TO <span>MY</span> BOLG</h1>
-    <h2 >New to this web, click <a href="/sign_up"><span>me</span></a> to register</h2>
+    <h2 >New to this web, click <a href="/signup"><span>me</span></a> to register</h2>
     <div class="content">
       <div id="form_wrapper" class="form_wrapper">
      	    <form class="login active" ng-submit="send(username,password);" role="form"><!--login & active including two class-->
@@ -32,7 +32,7 @@
             <div class="bottom">
               <div class="remember"><input type="checkbox" /><span>Keep me logged in</span></div>
        	      <input type="submit" value="Login" /><br>
-       	      <a href="/sign_up" ng-model="copy_username"><span>{{copy_username}}</span> 还没有账号 立即注册</a><br>
+       	      <a href="/signup" ng-model="copy_username"><span>{{copy_username}}</span> 还没有账号 立即注册</a><br>
             </div>
      	    </form>
       </div>
@@ -45,7 +45,7 @@
   </body>
   <footer>
     <div class="beright">
-      <a ng-href="/sign_up">Signup</a><!--not success yet-->
+      <a ng-href="/signup">Signup</a><!--not success yet-->
       <a ng-href="/upload">Upload</a>
     </div>
   </footer>

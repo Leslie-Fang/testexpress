@@ -5,38 +5,45 @@ var util = require('util');
 var fs = require('fs');
 var my=require('../database/mysql_api');
 var cookieParser = require('cookie-parser');
-var users = require('./users');
-var get = require('./get');
+//var users = require('./users');
+//var get = require('./get');
 /* GET home page. */
 //basic router, here every request would pass this router
 
-router.use('/users', users);
-router.use('/get', get);
+//router.use('/users', users);
+//router.use('/get', get);
+
+//the router in other files such as the signup.js also would pass this router
 router.use(function(req,res,next){
 	console.log("welcome!");
 	console.log('Time:', Date.now());
-  console.log('%s',req.method);
+  console.log('%s,%s',req.method,req.path);
   //console.log(req.Type());
-  if(req.method == 'GET'){
-        console.log('11111');
-        //if cookies expire, cookies would clear
-        if(req.cookies.username == null){
-          //if username is null,not login yet 
-          //must visit the login page
-          res.render('index');
-        }else{
-          //everytime user give a request
-          //reset the expire time of the cookies
-          //res.cookie('', req.param('username'));
-          //if login,do something continue
-          console.log(req.cookies);
-          //set the cookies again to avoid expire
-          res.cookie('username', req.cookies.username,{maxAge: 60*1000});
-          next();
-      }
+  //signup page would be affected by the login controller
+  if(req.path == '/signup'){
+    next();
   }
   else{
-    next();};
+    if(req.method == 'GET'){
+          console.log('11111');
+          //if cookies expire, cookies would clear
+          if(req.cookies.username == null){
+            //if username is null,not login yet 
+            //must visit the login page
+            res.render('index');
+          }else{
+            //everytime user give a request
+            //reset the expire time of the cookies
+            //res.cookie('', req.param('username'));
+            //if login,do something continue
+            console.log(req.cookies);
+            //set the cookies again to avoid expire
+            res.cookie('username', req.cookies.username,{maxAge: 60*1000});
+            next();
+        }
+    }
+    else{
+    next();};};
   /*
   if(req.cookies.isVisit){
     console.log(req.cookies);
@@ -81,10 +88,11 @@ router.get('/main', function(req, res, next) {
     //res.send('first index page!');
 });
 
+/*
 router.get('/sign_up', function(req, res, next) {
     res.render('signup');
     //res.send('first index page!');
-});
+});*/
 
 router.get('/second/', function(req, res, next){
   console.log('Request Type:', req.method);
