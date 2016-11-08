@@ -18,16 +18,17 @@ router.use(function(req,res,next){
 	console.log("welcome!");
 	console.log('Time:', Date.now());
   console.log('%s,%s',req.method,req.path);
+  next();
   //console.log(req.Type());
   //signup page would be affected by the login controller
-  if(req.path == '/signup'){
+  /*if(req.path == '/signup'){
     next();
   }
   else{
     if(req.method == 'GET'){
           console.log('11111');
           //if cookies expire, cookies would clear
-          if(req.cookies.username == null){
+          if(req.cookies.login == null){
             //if username is null,not login yet 
             //must visit the login page
             res.render('index');
@@ -38,12 +39,12 @@ router.use(function(req,res,next){
             //if login,do something continue
             console.log(req.cookies);
             //set the cookies again to avoid expire
-            res.cookie('username', req.cookies.username,{maxAge: 60*1000});
+            res.cookie('login', 'Yes',{maxAge: 60*1000});
             next();
         }
     }
     else{
-    next();};};
+    next();};};*/
   /*
   if(req.cookies.isVisit){
     console.log(req.cookies);
@@ -81,6 +82,10 @@ router.use(function(req,res,next){
 router.get('/', function(req, res, next) {
     res.render('index');
     //res.send('first index page!');
+});
+
+router.get('/login/',function(req, res, next){
+  res.render('login');
 });
 
 router.get('/main', function(req, res, next) {

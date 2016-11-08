@@ -2,10 +2,11 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Log In</title>
+    <title>Index</title>
     <!--<link rel="stylesheet" href="css/bootstrap3.0.0.css">
     <link rel="stylesheet" href="css/bootstrap-datetimepicker.css">-->
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/Index.css">
+
   </head>
   <!--<body ng-app="app" ng-init="name={id:1,name:'leslie'}">-->
   <!-- ng-init not used frequently-->
@@ -16,37 +17,25 @@
           <a href="html5_noscript.asp">Next</a>
       </nav>
   </div>-->
-  <body class="wrapper" ng-app="first" ng-controller="login">
-    <h1>WElCOME TO <span>MY</span> BOLG</h1>
-    <h2 >New to this web, click <a href="/signup"><span>me</span></a> to register</h2>
-    <div class="content">
-      <div id="form_wrapper" class="form_wrapper">
-     	    <form class="login active" ng-submit="send(username,password);" role="form"><!--login & active including two class-->
-            <div class="beleft">
-              <h3>Login</h3>
-              <label>Username:</label>
-       	      <input type="text" name="username" ng-model="username" placeholder="用户名" required/><br>
-              <label>Password:</label>
-       	      <input type="password" name="password" ng-model="password" placeholder="密码" required/><br>
-            </div>
-            <div class="bottom">
-              <div class="remember"><input type="checkbox" /><span>Keep me logged in</span></div>
-       	      <input type="submit" value="Login" /><br>
-       	      <a href="/signup" ng-model="copy_username"><span>{{copy_username}}</span> 还没有账号 立即注册</a><br>
-            </div>
-     	    </form>
-      </div>
+  <body ng-app="indexpage_controller" ng-controller="index">
+    <div class="headerlink">
+      <ul>
+        <li ><a ng-href="/login">登入</a></li>
+        <li ><a ng-href="/signup">注册</a></li>
+      </ul>
     </div>
+    <h1>沉思语录</h1>
+    <h2>想对世界说真话 证明我们的存在</h2>
+    <!--<h2 >New to this web, click <a href="/signup"><span>me</span></a> to register</h2>-->
     <!--<h5 class="beright" ng-model="loginstate">{{loginstate}}<h5>-->
     <!--<div class="wrapper"><p>wrapper</p></div>-->
     <script src="javascripts/angularjs/angular.js"></script>
-    <script src="javascripts/controller/app.js"></script>
-    <script src="javascripts/controller/logandreg.js"></script>
+    <script src="javascripts/controller/index.js"></script>
   </body>
   <footer>
-    <div class="beright">
-      <a ng-href="/signup">Signup</a><!--not success yet-->
+    <!--<div class="beright">
+      <a ng-href="/signup">Signup</a>
       <a ng-href="/upload">Upload</a>
-    </div>
+    </div>-->
   </footer>
 </html>

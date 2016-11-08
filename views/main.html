@@ -4,11 +4,21 @@
     <meta charset="utf-8">
     <title>Blog</title>
     <!--<link rel="stylesheet" href="css/bootstrap3.0.0.css">
-    <link rel="stylesheet" href="css/bootstrap-datetimepicker.css">-->
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/bootstrap-datetimepicker.css">
+    <link rel="stylesheet" href="css/style.css">-->
+    <link rel="stylesheet" href="css/Index.css">
   </head>
-  <body class="wrapper">
-    <h1 class="becenter">My BOLG</h1>
+  <body ng-app="mainpage_controller" ng-controller="main">
+    <div class="headerlink">
+      <ul>
+        <li ><a ng-href="/login">登入</a></li>
+        <li ><a ng-href="/signup">注册</a></li>
+        <li ><a ng-href="/upload">上传</a></li>
+      </ul>
+      <h1 >沉思语录</h1>
+    </div>
+    <script src="javascripts/angularjs/angular.js"></script>
+    <script src="javascripts/controller/main.js"></script>
   </body>
 
 </html>

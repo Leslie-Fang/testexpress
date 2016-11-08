@@ -5,7 +5,14 @@
     <title>Sign Up</title>
   	<link rel="stylesheet" href="css/style.css">
   </head>
-  <body class="wrapper" ng-app="signup" ng-controller="regist">
+  <body class="wrapper" ng-app="app" ng-controller="regist">
+    <div class="headerlink">
+      <ul>
+        <li ><a ng-href="/login">登入</a></li>
+        <li ><a ng-href="/signup">注册</a></li>
+        <li ><a ng-href="/upload">上传</a></li>
+      </ul>
+    </div>
     <div class="content">
       <div id="form_wrapper" class="form_wrapper">
  	    <form class="login active" ng-submit="send(username,password);" role="form">
@@ -24,6 +31,6 @@
  	  </div>
  	</div>
  	<script src="javascripts/angularjs/angular.js"></script>
-    <script src="javascripts/controller/regist.js"></script>
+    <script src="javascripts/controller/app.js"></script>
   </body>
 </html>
