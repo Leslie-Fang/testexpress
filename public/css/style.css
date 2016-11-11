@@ -29,7 +29,7 @@ h2 span{
 	color:#ffa800;
 }
 a{
-	color:#777;
+	color:#444444;
 }
 a:hover{
 	color:#222;
@@ -87,7 +87,7 @@ a.back{
 .form_wrapper h3{
 	padding:20px 30px 20px 30px;
 	background-color:#444;
-	color:#fff;
+	color:#ffa800;
 	font-size:25px;
 	border-bottom:1px solid #ddd;
 }
