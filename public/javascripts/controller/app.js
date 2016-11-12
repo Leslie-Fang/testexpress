@@ -16,6 +16,7 @@ app.controller('login', function($scope,$http) {
                    $scope.copy_username = $scope.username;
 				  // window.location = "http://www.baidu.com";//successfully, nav to a outside web page
 				           window.location="/main";//successfully nav to a page in the project
+                   alert("登入成功!");
                    //$scope.username=data.username;
                }else {
                     alert("用户名或密码错误！");
@@ -38,7 +39,8 @@ app.controller('regist', function($scope,$http) {
         }).success(function(data) {
                if(data.state){
                    $scope.loginstate='yes';
-                   window.location="/main";
+                   window.location="/login";
+                   alert("欢迎注册，登入之后可以看到更多内容!");
                    //$scope.username=data.username;
                }else {
                     alert("注册失败!");
