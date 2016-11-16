@@ -5,10 +5,20 @@ var util = require('util');
 var fs = require('fs');
 var my=require('../database/mysql_api');
 var cookieParser = require('cookie-parser');
+
+//app load from app.js file, couldn't redefine app
+//var app = require('../app');
+//var io = require('socket.io')(http);
 //var users = require('./users');
 //var get = require('./get');
 /* GET home page. */
 //basic router, here every request would pass this router
+
+/*var server=require('../bin/www');
+var io = require('socket.io')(server);
+io.on('connection', function(socket){
+  console.log('a user connected');
+});*/
 
 //router.use('/users', users);
 //router.use('/get', get);
@@ -18,6 +28,15 @@ router.use(function(req,res,next){
 	console.log("welcome!");
 	console.log('Time:', Date.now());
   console.log('%s,%s',req.method,req.path);
+
+/*io.on('connection', function(socket){
+  console.log('a user connected');
+});*/
+
+ //io.on('connection', function(socket){
+ //   console.log('a user connected');
+ // });
+
   next();
   //console.log(req.Type());
   //signup page would be affected by the login controller
@@ -93,6 +112,15 @@ router.get('/main', function(req, res, next) {
     //res.send('first index page!');
 });
 
+router.get('/chat', function(req, res, next) {
+    res.render('onlinechat');
+    //res.send('first index page!');
+});
+
+router.get('/reactjs', function(req, res, next) {
+    res.render('reactjstest');
+    //res.send('react!');
+});
 /*
 router.get('/sign_up', function(req, res, next) {
     res.render('signup');

@@ -7,7 +7,8 @@
 var app = require('../app');
 var debug = require('debug')('myapp:server');
 var http = require('http');
-
+//two different method to write
+//var io = require('socket.io');
 /**
  * Get port from environment and store in Express.
  */
@@ -20,12 +21,36 @@ app.set('port', port);
  */
 
 var server = http.createServer(app);
-
 /**
  * Listen on provided port, on all network interfaces.
  */
+server.listen(port,function(){
+  console.log('App start! Listen on port %s',port);
+});
 
-server.listen(port);
+var io = require('socket.io')(server);
+io.on('connection', function(socket){
+  console.log('a user connected');
+
+  socket.on('chat message', function(msg){
+    console.log('message: ' + msg);
+    //emit another event
+    io.emit('chat message', msg);
+  });
+
+  /*socket.on('message', function(data){
+    console.log(data.messgae);
+  });*/
+
+  socket.on('disconnect', function(){
+    console.log('user disconnected');
+  });
+});
+
+
+//server be ready to receive the websocket connection
+//var socket_io = io.listen(server);
+
 server.on('error', onError);
 server.on('listening', onListening);
 
@@ -88,3 +113,5 @@ function onListening() {
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
 }
+
+module.exports = server;
