@@ -39,7 +39,7 @@ exports.login=function(req, res){
 			//req.session={id:user.id,loginid:user.loginid};
 			//the maxage is the cookies's this ziduan expire time
 			//after expire need to login again
-			//res.cookie('login', 'Yes',{maxAge: 60*1000});
+			res.cookie('user_name', req.param('username'), {maxAge: 60*1000});
 			response.state=true;
 			response.id=user.id;
 			response.loginid=user.loginid;

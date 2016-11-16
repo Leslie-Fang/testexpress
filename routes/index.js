@@ -8,18 +8,10 @@ var cookieParser = require('cookie-parser');
 
 //app load from app.js file, couldn't redefine app
 //var app = require('../app');
-//var io = require('socket.io')(http);
 //var users = require('./users');
 //var get = require('./get');
 /* GET home page. */
 //basic router, here every request would pass this router
-
-/*var server=require('../bin/www');
-var io = require('socket.io')(server);
-io.on('connection', function(socket){
-  console.log('a user connected');
-});*/
-
 //router.use('/users', users);
 //router.use('/get', get);
 
@@ -29,6 +21,13 @@ router.use(function(req,res,next){
 	console.log('Time:', Date.now());
   console.log('%s,%s',req.method,req.path);
 
+  if(req.cookies.user_name){
+    console.log(req.cookies);
+  }
+  else{
+    //init set time -1, only avaiable in this window
+    res.cookie('user_name', '游客', {maxAge: 60*1000});
+  }
 /*io.on('connection', function(socket){
   console.log('a user connected');
 });*/

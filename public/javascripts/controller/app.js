@@ -1,5 +1,11 @@
 var app = angular.module("app", []);
+//the global varable in the rootScope is able to use in all the followingcontrollers
+//but when the page reloaded, this global varable would also reinit 
+app.run(function($rootScope) {
+    $rootScope.user="游客A";
+});
 app.controller('login', function($scope,$http) {
+    //$rootScope.user="游客A";
     $scope.copy_username = "游客";
     //$scope.loginstate='you are not login';
     $scope.send=function(username,password) {
@@ -14,6 +20,8 @@ app.controller('login', function($scope,$http) {
                if(data.state){
                    //$scope.loginstate='hi,'+$scope.username;
                    $scope.copy_username = $scope.username;
+                  // $rootScope.user=$scope.username;
+                   //$rootScope
 				  // window.location = "http://www.baidu.com";//successfully, nav to a outside web page
 				           window.location="/main";//successfully nav to a page in the project
                    alert("登入成功!");
@@ -50,5 +58,4 @@ app.controller('regist', function($scope,$http) {
             });
     }
   });
-
 //document.write('<script src="javascripts/controller/logandreg.js"></script>');
