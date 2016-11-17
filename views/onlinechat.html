@@ -10,7 +10,16 @@
     <script src="http://code.angularjs.org/1.5.8/angular-cookies.min.js"></script>
   </head>
   <body ng-app="chatapp" ng-controller="chat">
-    <h1 ng-model="Hint">{{Hint}}</h1>
+    <div class="headerlink">
+      <ul>
+        <li ><a ng-href="/login">登入</a></li>
+        <li ><a ng-href="/signup">注册</a></li>
+        <li ><a ng-href="/main">主页</a></li>
+      </ul>
+    </div>
+    <div class="hint">
+      <h1 ng-model="Hint">{{Hint}}</h1>
+    </div>
     <ul id="messages"></ul>
     <!--<form action="">
       <input id="m" autocomplete="off" /><button>Send</button>

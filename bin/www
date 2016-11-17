@@ -34,6 +34,7 @@ server.listen(port,function(){
 var io = require('socket.io')(server);
 //connect session and socket.session
 io.use(sharedsession(app.session));
+
 io.on('connection', function(socket){
   console.log('a user connected');
   console.log(socket.handshake.session.user);
