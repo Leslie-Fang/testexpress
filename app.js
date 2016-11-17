@@ -3,7 +3,7 @@ var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
-var session = require('express-session');
+var session_module = require('express-session');
 var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
@@ -30,10 +30,12 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 //app.use(express.bodyParser({ keepExtensions: true, uploadDir: '/upload' }));
 //设置 session 的可选参数
-app.use(session({
+//define the session config in the app stor area
+app.session=session_module({
   secret: 'recommand 128 bytes random string', // 建议使用 128 个字符的随机字符串
   cookie: { maxAge: 60 * 1000 } //设置存放 session id 的 cookie 的相关选项 
-}));
+});
+app.use(app.session);
 
 app.use('/', routes);
 app.use('/users', users);
@@ -70,5 +72,6 @@ app.use(function(err, req, res, next) {
   });
 });
 
-
+//define a varable for app
+app.var_test='h';
 module.exports = app;

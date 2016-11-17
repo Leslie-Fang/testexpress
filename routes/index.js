@@ -37,7 +37,7 @@ router.use(function(req,res,next){
    // res.send('<p>第 ' + req.session.isVisit + '次来此页面</p>');
   } else {
     req.session.isVisit = 1;
-    req.session.user = 'visitor_abc';
+    req.session.user = '游客';
    // res.send("欢迎第一次来这里");
     console.log(req.session);
   }

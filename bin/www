@@ -7,6 +7,7 @@
 var app = require('../app');
 var debug = require('debug')('myapp:server');
 var http = require('http');
+var sharedsession = require("express-socket.io-session");
 //this module loaded to get the login user name
 //var my=require('../database/mysql_api');
 //two different method to write
@@ -31,8 +32,11 @@ server.listen(port,function(){
 });
 
 var io = require('socket.io')(server);
+//connect session and socket.session
+io.use(sharedsession(app.session));
 io.on('connection', function(socket){
   console.log('a user connected');
+  console.log(socket.handshake.session.user);
 
   /*
   //this jquery method has been removed
@@ -46,7 +50,7 @@ io.on('connection', function(socket){
     console.log('message: ' + msg);
     /*emit another event
     the msg send back should add the username*/
-    io.emit('chat message', msg);
+    io.emit('chat message', socket.handshake.session.user+': '+msg);
   });
   /*socket.on('message', function(data){
     console.log(data.messgae);
