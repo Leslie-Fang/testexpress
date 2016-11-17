@@ -28,14 +28,19 @@ router.use(function(req,res,next){
     //init set time -1, only avaiable in this window
     res.cookie('user_name', '游客', {maxAge: 60*1000});
   }
-/*io.on('connection', function(socket){
-  console.log('a user connected');
-});*/
-
- //io.on('connection', function(socket){
- //   console.log('a user connected');
- // });
-
+  
+  // 检查 session 中的 isVisit 字段
+  // 如果存在则增加一次，否则为 session 设置 isVisit 字段，并初始化为 1。
+  if(req.session.isVisit) {
+    req.session.isVisit++;
+    console.log(req.session);
+   // res.send('<p>第 ' + req.session.isVisit + '次来此页面</p>');
+  } else {
+    req.session.isVisit = 1;
+    req.session.user = 'visitor_abc';
+   // res.send("欢迎第一次来这里");
+    console.log(req.session);
+  }
   next();
   //console.log(req.Type());
   //signup page would be affected by the login controller
@@ -82,18 +87,6 @@ router.use(function(req,res,next){
     //if login,do something continue
     console.log(req.cookies);
     next();
-  }*/
-  /*
-  // 检查 session 中的 isVisit 字段
-  // 如果存在则增加一次，否则为 session 设置 isVisit 字段，并初始化为 1。
-  if(req.session.isVisit) {
-    req.session.isVisit++;
-    console.log(req.session);
-   // res.send('<p>第 ' + req.session.isVisit + '次来此页面</p>');
-  } else {
-    req.session.isVisit = 1;
-   // res.send("欢迎第一次来这里");
-    console.log(req.session);
   }*/
 });
 

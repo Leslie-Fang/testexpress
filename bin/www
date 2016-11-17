@@ -7,6 +7,8 @@
 var app = require('../app');
 var debug = require('debug')('myapp:server');
 var http = require('http');
+//this module loaded to get the login user name
+//var my=require('../database/mysql_api');
 //two different method to write
 //var io = require('socket.io');
 /**
@@ -42,7 +44,8 @@ io.on('connection', function(socket){
 
   socket.on('chat angular message', function(msg){
     console.log('message: ' + msg);
-    //emit another event
+    /*emit another event
+    the msg send back should add the username*/
     io.emit('chat message', msg);
   });
   /*socket.on('message', function(data){

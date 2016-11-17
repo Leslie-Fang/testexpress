@@ -32,7 +32,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 //设置 session 的可选参数
 app.use(session({
   secret: 'recommand 128 bytes random string', // 建议使用 128 个字符的随机字符串
-  cookie: { maxAge: 60 * 1000 }
+  cookie: { maxAge: 60 * 1000 } //设置存放 session id 的 cookie 的相关选项 
 }));
 
 app.use('/', routes);
