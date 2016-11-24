@@ -2,11 +2,11 @@
 //use the cookie take the login control in the frontend
 var app = angular.module("chatapp", ['ngCookies']);
 
-app.controller('chat', function($scope,$rootScope,$http,$cookies) {
+app.controller('chat', ['$scope','$rootScope','$http','$cookies',function($scope,$rootScope,$http,$cookies) {
   $scope.Hint = "Online Chat Room";
 //use the cookie to get username and set the login control in the frontend
-  var use = $cookies.get('user_name');
-  
+  //var use = $cookies.get('user_name');
+  $scope.chat_user = $cookies.get('user_name');
   var socket = io();
   $scope.send=function(TextInput){
     socket.emit('chat angular message', TextInput);
@@ -17,4 +17,4 @@ app.controller('chat', function($scope,$rootScope,$http,$cookies) {
   socket.on('chat message', function(msg){
       $('#messages').append($('<li>').text(msg));
    });
-});
+}]);

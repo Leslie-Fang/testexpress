@@ -1,3 +1,11 @@
+html,body {
+  height: 100%;
+}
+*{
+	margin:0;
+	padding:0;
+}
+
 body{
 	font-family:"Trebuchet MS", "Myriad Pro", Arial, sans-serif;
 	font-size:14px;
@@ -43,6 +51,7 @@ h2 span{
 .headerlink{
 	min-height:100px; 
 	height:auto;
+	text-align: left;
 }
 
 .beright{

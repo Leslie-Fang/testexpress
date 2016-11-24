@@ -5,33 +5,34 @@
     <title>Sign Up</title>
   	<link rel="stylesheet" href="css/style.css">
   </head>
-  <body class="wrapper" ng-app="app" ng-controller="regist">
+  <body ng-app="app" ng-controller="regist">
     <div class="headerlink">
       <ul>
+        <li ><a ng-href="/main">主页</a></li>
         <li ><a ng-href="/login">登入</a></li>
         <li ><a ng-href="/signup">注册</a></li>
-        <li ><a ng-href="/main">主页</a></li>
-        <li ><a ng-href="/upload">上传</a></li>
       </ul>
     </div>
-    <div class="content">
-      <div id="form_wrapper" class="form_wrapper">
-   	    <form class="login active" ng-submit="send(username,password);" role="form">
-   	      <div class="beleft">
-  	          <h3>注册</h3>
-  	          <label>用户名:</label>
-  	 	      <input type="text" name="username" ng-model="username" placeholder="用户名" required/><br>
-  	 	      <label>密码:</label>
-  	 	      <input type="password" name="password" ng-model="password" placeholder="密码" required/><br>
-   	      </div>
-   	      <div class="bottom">
-   	          <input type="submit" value="注册" >
-   	          <a href="/signup">还没有账号 立即注册</a><br>
-   	      </div>
-   	    </form>
- 	    </div>
- 	  </div>
- 	<script src="javascripts/angularjs/angular.min.js"></script>
-    <script src="javascripts/controller/app.js"></script>
+    <div class="wrapper">
+      <div class="content">
+        <div id="form_wrapper" class="form_wrapper">
+     	    <form class="login active" ng-submit="send(username,password);" role="form">
+     	      <div class="beleft">
+    	          <h3>注册</h3>
+    	          <label>用户名:</label>
+    	 	      <input type="text" name="username" ng-model="username" placeholder="用户名" required/><br>
+    	 	      <label>密码:</label>
+    	 	      <input type="password" name="password" ng-model="password" placeholder="密码" required/><br>
+     	      </div>
+     	      <div class="bottom">
+     	          <input type="submit" value="注册" >
+     	          <a href="/signup">还没有账号 立即注册</a><br>
+     	      </div>
+     	    </form>
+   	    </div>
+   	  </div>
+   	  <script src="javascripts/angularjs/angular.min.js"></script>
+      <script src="javascripts/controller/app.js"></script>
+    </div>
   </body>
 </html>

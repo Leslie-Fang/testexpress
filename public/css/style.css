@@ -48,7 +48,9 @@ ul li{
 .headerlink{
 	min-height:100px; 
 	height:auto;
+	text-align: left;
 }
+
 .wrapper{
 	width:960px;
 	margin:20px auto;

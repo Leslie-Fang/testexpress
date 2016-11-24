@@ -16,6 +16,8 @@ var cookieParser = require('cookie-parser');
 //router.use('/get', get);
 
 //the router in other files such as the signup.js also would pass this router
+router.user_number = 0;
+
 router.use(function(req,res,next){
 	console.log("welcome!");
 	console.log('Time:', Date.now());
@@ -25,10 +27,11 @@ router.use(function(req,res,next){
     console.log(req.cookies);
   }
   else{
-    //init set time -1, only avaiable in this window
+    //also set cookie here in the first time
+    //username in the cookie would be used in the front-end
     res.cookie('user_name', '游客', {maxAge: 60*1000});
   }
-  
+
   // 检查 session 中的 isVisit 字段
   // 如果存在则增加一次，否则为 session 设置 isVisit 字段，并初始化为 1。
   if(req.session.isVisit) {
@@ -39,7 +42,8 @@ router.use(function(req,res,next){
     req.session.isVisit = 1;
     req.session.user = '游客';
    // res.send("欢迎第一次来这里");
-    console.log(req.session);
+   // console.log(req.session);
+    //init set time -1, only avaiable in this window
   }
   next();
   //console.log(req.Type());

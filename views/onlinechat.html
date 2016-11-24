@@ -12,9 +12,9 @@
   <body ng-app="chatapp" ng-controller="chat">
     <div class="headerlink">
       <ul>
+        <li ><a ng-href="/main">主页</a></li>
         <li ><a ng-href="/login">登入</a></li>
         <li ><a ng-href="/signup">注册</a></li>
-        <li ><a ng-href="/main">主页</a></li>
       </ul>
     </div>
     <div class="hint">
@@ -25,7 +25,7 @@
       <input id="m" autocomplete="off" /><button>Send</button>
     </form>-->
     <form ng-submit="send(TextInput);">
-      <input ng-model="TextInput" /><button>Submit</button>
+      <label ng-model="chat_user">{{chat_user}}:</label><input ng-model="TextInput" /><button>Submit</button>
     </form>
     <!--all move into the controller.js
     <script>
