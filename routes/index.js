@@ -6,6 +6,9 @@ var fs = require('fs');
 var my=require('../database/mysql_api');
 var cookieParser = require('cookie-parser');
 
+var redis= require('redis');
+var redis_db=redis.createClient();
+
 //app load from app.js file, couldn't redefine app
 //var app = require('../app');
 //var users = require('./users');
@@ -45,6 +48,8 @@ router.use(function(req,res,next){
    // console.log(req.session);
     //init set time -1, only avaiable in this window
   }
+
+  //redis_db.set("red","success");
   next();
   //console.log(req.Type());
   //signup page would be affected by the login controller

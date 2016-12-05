@@ -10,8 +10,9 @@ app.controller('chat', ['$scope','$rootScope','$http','$cookies',function($scope
   var socket = io();
   $scope.send=function(TextInput){
     socket.emit('chat angular message', TextInput);
+    //clear the input 
     $scope.TextInput='';
-//in the backend listening to this event in the www file
+    //in the backend listening to this event in the www file
   }
 //jquery is also able to be called
   socket.on('chat message', function(msg){

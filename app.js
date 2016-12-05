@@ -33,7 +33,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 //define the session config in the app stor area
 app.session=session_module({
   secret: 'recommand 128 bytes random string', // 建议使用 128 个字符的随机字符串
-  cookie: { maxAge: 60 * 1000 } //设置存放 session id 的 cookie 的相关选项 
+  cookie: { maxAge: 60 * 60 * 1000 } //设置存放 session id 的 cookie 的相关选项 1 hour to expire
 });
 app.use(app.session);
 
