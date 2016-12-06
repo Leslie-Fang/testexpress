@@ -8,6 +8,8 @@ var app = require('../app');
 var debug = require('debug')('myapp:server');
 var http = require('http');
 var sharedsession = require("express-socket.io-session");
+var redis_client=require('../database/redis_api');
+//var global_data=require('../database/global');
 //this module loaded to get the login user name
 //var my=require('../database/mysql_api');
 //two different method to write
@@ -42,10 +44,27 @@ var user_number=0;
 io.on('connection', function(socket){
   console.log('a user connected');
   console.log(socket.handshake.session.user);
-
+ // console.log(socket);
+ // console.log(socket.handshake.sessionID);
+ // console.log(socket.id);
   //change user numbers and emit the event
-  user_number = user_number+1;
-  console.log(user_number);
+  user_number = user_number + 1;
+ // console.log(user_number);
+
+ /* redis_client.hexists("user_session_id",socket.handshake.sessionID,function(err, replies){
+    if(replies == 0){
+      //if new user, user-agent not exist in the hashmap
+      //then set the uaer-agent and the user-id
+      redis_client.hset("user_session_id",socket.handshake.sessionID,user_number);
+      //redis_client.hset("user_id_ua",user_id_number,ua);
+      //console.log("hexists_judge" + user_id_number);
+    }
+    else{
+      console.log(replies);
+      //console.log("hexists_judge" + user_id_number);
+    }
+  });*/
+
   io.emit('user number change', user_number);
  // redis_client.set("blue","uil");
  // app.rclient.set("bule","success_again");

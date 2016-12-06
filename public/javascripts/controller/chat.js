@@ -4,10 +4,11 @@ var app = angular.module("chatapp", ['ngCookies']);
 
 app.controller('chat', ['$scope','$rootScope','$http','$cookies',function($scope,$rootScope,$http,$cookies) {
   $scope.Hint = "Online Chat Room";
-  $scope.chat_number = 2;
-//use the cookie to get username and set the login control in the frontend
+  $scope.chat_number = 0;
+  //use the cookie to get username and set the login control in the frontend
   //var use = $cookies.get('user_name');
   $scope.chat_user = $cookies.get('user_name');
+
   var socket = io();
   $scope.send=function(TextInput){
     socket.emit('chat angular message', TextInput);
@@ -15,7 +16,7 @@ app.controller('chat', ['$scope','$rootScope','$http','$cookies',function($scope
     $scope.TextInput='';
     //in the backend listening to this event in the www file
   }
-//jquery is also able to be called
+  //jquery is also able to be called
   socket.on('chat message', function(msg){
       $('#messages').append($('<li>').text(msg));
    });
@@ -26,9 +27,9 @@ app.controller('chat', ['$scope','$rootScope','$http','$cookies',function($scope
       //$('#messages').append($('<li>').text(msg));
 
       //unable to use ecope to change angular model in socket.on
-      $rootScope.chat_number = msg;
-
+      //$rootScope.chat_number = msg;
       //but able to use jquery in the socket.on to change 
       $('h3').text('当前在线人数:' + msg);
   });
+
 }]);

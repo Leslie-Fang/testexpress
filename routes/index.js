@@ -6,34 +6,66 @@ var fs = require('fs');
 var my=require('../database/mysql_api');
 var cookieParser = require('cookie-parser');
 var app = require('../app');
-//app load from app.js file, couldn't redefine app
-//var app = require('../app');
-//var users = require('./users');
-//var get = require('./get');
-/* GET home page. */
-//basic router, here every request would pass this router
-//router.use('/users', users);
-//router.use('/get', get);
-
-//var redis = require('redis');
-//var redis_client = redis.createClient();
-
+var global_data=require('../database/global');
+var redis_client=require('../database/redis_api');
 
 //the router in other files such as the signup.js also would pass this router
-router.user_number = 0;
+user_id_number = 0;
 
 router.use(function(req,res,next){
 	console.log("welcome!");
 	console.log('Time:', Date.now());
   console.log('%s,%s',req.method,req.path);
+  //console.log(app);
+  //console.log(redis);
+  console.log(global_data);
+
+  //test local redis
+  //redis_client.set("blue","success_again");
+
+  //get user-agent to distinguish different users
+  var ua = req.headers['user-agent'];
+  console.log(ua);
+  //console.log(redis_client.set("blue","aop"));
+  //if it's a new user, provide a user-id
+
+  //use the callback function to get the value
+  redis_client.hexists("user_ua_id",ua,function(err, replies){
+    if(replies == 0){
+      //if new user, user-agent not exist in the hashmap
+      //then set the uaer-agent and the user-id
+      user_id_number = user_id_number + 1;
+      redis_client.hset("user_ua_id",ua,user_id_number);
+      //redis_client.hset("user_id_ua",user_id_number,ua);
+      //console.log("hexists_judge" + user_id_number);
+    }
+    else{
+      console.log(replies);
+      console.log("hexists_judge" + user_id_number);
+    }
+  });
+
+  //test hkeys
+  /*redis_client.hkeys("myhash",function(err, replies){
+    console.log(replies.length + " replies:");
+    replies.forEach(function (reply, i) {
+        console.log("    " + i + ": " + reply);
+    });
+  });*/
 
   if(req.cookies.user_name){
     console.log(req.cookies);
   }
   else{
+   /* //async unable
+    redis_client.hget("user_ua_id",ua,function(err, replies){
+      console.log("hy");
+      console.log(replies);
+    });
+    console.log("hn");*/
     //also set cookie here in the first time
     //username in the cookie would be used in the front-end
-    res.cookie('user_name', '游客', {maxAge: 60*60*1000});
+    res.cookie('user_name', "游客", {maxAge: 60*60*1000});
   }
 
   // 检查 session 中的 isVisit 字段
@@ -44,62 +76,12 @@ router.use(function(req,res,next){
    // res.send('<p>第 ' + req.session.isVisit + '次来此页面</p>');
   } else {
     req.session.isVisit = 1;
-    req.session.user = '游客';
+    req.session.user = "游客";
    // res.send("欢迎第一次来这里");
    // console.log(req.session);
     //init set time -1, only avaiable in this window
   }
-
-  //test local redis
-//  redis_client.set("blue","success_again");
   next();
-  
-  //console.log(req.Type());
-  //signup page would be affected by the login controller
-  /*if(req.path == '/signup'){
-    next();
-  }
-  else{
-    if(req.method == 'GET'){
-          console.log('11111');
-          //if cookies expire, cookies would clear
-          if(req.cookies.login == null){
-            //if username is null,not login yet 
-            //must visit the login page
-            res.render('index');
-          }else{
-            //everytime user give a request
-            //reset the expire time of the cookies
-            //res.cookie('', req.param('username'));
-            //if login,do something continue
-            console.log(req.cookies);
-            //set the cookies again to avoid expire
-            res.cookie('login', 'Yes',{maxAge: 60*1000});
-            next();
-        }
-    }
-    else{
-    next();};};*/
-  /*
-  if(req.cookies.isVisit){
-    console.log(req.cookies);
-  }
-  else{
-    res.cookie('isVisit', 1, {maxAge: 60 * 1000});
-  }*/
-  /*
-  if(req.cookies.username == null){
-    //if username is null,not login yet 
-    //must visit the login page
-    res.render('index');
-  }else{
-    //everytime user give a request
-    //reset the expire time of the cookies
-    //res.cookie('', req.param('username'));
-    //if login,do something continue
-    console.log(req.cookies);
-    next();
-  }*/
 });
 
 router.get('/', function(req, res, next) {
