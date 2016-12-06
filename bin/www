@@ -79,7 +79,7 @@ io.on('connection', function(socket){
       redis_client.hget("user_session_id",socket.handshake.sessionID,function(err, replies){
         console.log(replies);
         console.log("!!!!");
-        socket.handshake.session.user = "游客"+"hget";
+        socket.handshake.session.user = "游客"+replies;
         socket.emit('user name',socket.handshake.session.user);
       });
       //console.log("hexists_judge" + user_id_number);
