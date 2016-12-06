@@ -6,6 +6,7 @@ var config = {
 	  password : 'secret',
 	  database : 'sampdb'
 	};
+//var login_user="visitor";
 
 exports.createone=function(){
 	var connection = mysql.createConnection(config);
@@ -36,7 +37,14 @@ exports.login=function(req, res){
 		var user=result[0];
 		var response={state:false,id:'',loginid:''};
 		if(user!=null){
-			req.session={id:user.id,loginid:user.loginid};
+		  //req.session={id:user.id,loginid:user.loginid};
+		  /*set the cookie
+			the maxage is the cookies's expire time
+			after expire need to login again*/
+			res.cookie('user_name', req.param('username'), {maxAge: 60*1000});
+			req.session.user = req.param('username');
+			//set the username after login
+			//login_user=req.param('username');
 			response.state=true;
 			response.id=user.id;
 			response.loginid=user.loginid;
@@ -65,3 +73,5 @@ exports.signup=function(req, res){
 	});
 	connection.end();
 }
+
+//exports.login_user = login_user;

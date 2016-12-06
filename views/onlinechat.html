@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Online Chat Room</title>
+    <link rel="stylesheet" href="css/chat.css">
+    <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+    <script src="javascripts/angularjs/angular.min.js"></script>
+    <script src="javascripts/controller/chat.js"></script>
+    <script src="http://code.angularjs.org/1.5.8/angular-cookies.min.js"></script>
+  </head>
+  <body ng-app="chatapp" ng-controller="chat">
+    <div class="headerlink">
+      <ul>
+        <li ><a ng-href="/main">主页</a></li>
+        <li ><a ng-href="/login">登入</a></li>
+        <li ><a ng-href="/signup">注册</a></li>
+      </ul>
+    </div>
+    <div class="hint">
+      <h1 ng-model="Hint">{{Hint}}</h1>
+    </div>
+    <ul id="messages"></ul>
+    <!--<form action="">
+      <input id="m" autocomplete="off" /><button>Send</button>
+    </form>-->
+    <form ng-submit="send(TextInput);">
+      <label ng-model="chat_user">{{chat_user}}:</label><input ng-model="TextInput" /><button>Submit</button>
+    </form>
+    <!--all move into the controller.js
+    <script>
+      var socket = io();
+      /*$('form').submit(function(){
+        socket.emit('message',{'message':'hello'});
+      });*/
+      /*
+      //use angularjs insteadof jquery
+      $('form').submit(function(){
+        socket.emit('chat message', $('#m').val());
+        //clear the input in the box
+        $('#m').val('');
+        return false;
+      });*/
+      //listen to the event from the server
+      socket.on('chat message', function(msg){
+        $('#messages').append($('<li>').text('y:'+msg));
+      });
+    </script>-->
+  </body>
+</html>

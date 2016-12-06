@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Log In</title>
+    <!--<link rel="stylesheet" href="css/bootstrap3.0.0.css">
+    <link rel="stylesheet" href="css/bootstrap-datetimepicker.css">-->
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+  <!--<body ng-app="app" ng-init="name={id:1,name:'leslie'}">-->
+  <!-- ng-init not used frequently-->
+  <!--<div class="navbar">
+      <nav>
+          <a href="index.asp">Home</a>
+          <a href="html5_meter.asp">Previous</a>
+          <a href="html5_noscript.asp">Next</a>
+      </nav>
+  </div>-->
+  <body ng-app="app" ng-controller="login">
+    <!--<h1 class="login">有朋自远方来 不亦乐乎</h1>-->
+    <div class="headerlink">
+      <ul>
+        <li ><a ng-href="/main">主页</a></li>
+        <li ><a ng-href="/login">登入</a></li>
+        <li ><a ng-href="/signup">注册</a></li>
+      </ul>
+    </div>
+    <div class="wrapper">
+      <!--<h2 >New to this web, click <a href="/signup"><span>me</span></a> to register</h2>-->
+      <div class="content">
+        <div id="form_wrapper" class="form_wrapper">
+       	    <form class="login active" ng-submit="send(username,password);" role="form"><!--login & active including two class-->
+              <div class="beleft">
+                <h3>登入</h3>
+                <label>用户名:</label>
+         	      <input type="text" name="username" ng-model="username" placeholder="用户名" required/><br>
+                <label>密码:</label>
+         	      <input type="password" name="password" ng-model="password" placeholder="密码" required/><br>
+              </div>
+              <div class="bottom">
+                <div class="remember"><input type="checkbox" /><span>Keep me logged in</span></div>
+         	      <input type="submit" value="登入" /><br>
+         	      <a href="/signup" ng-model="copy_username"><span>{{copy_username}}</span> 还没有账号 立即注册
+                </a><br>
+              </div>
+       	    </form>
+        </div>
+      </div>
+      <!--<h5 class="beright" ng-model="loginstate">{{loginstate}}<h5>-->
+      <!--<div class="wrapper"><p>wrapper</p></div>-->
+      <script src="javascripts/angularjs/angular.min.js"></script>
+      <script src="javascripts/controller/app.js"></script>
+    </div>
+  </body>
+  <footer>
+    <div class="beright">
+      <a ng-href="/signup">Signup</a><!--not success yet-->
+      <a ng-href="/upload">Upload</a>
+    </div>
+  </footer>
+</html>
