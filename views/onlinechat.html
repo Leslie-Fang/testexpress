@@ -28,7 +28,7 @@
       <input id="m" autocomplete="off" /><button>Send</button>
     </form>-->
     <form ng-submit="send(TextInput);">
-      <label ng-model="chat_user">{{chat_user}}:</label><input ng-model="TextInput" /><button>Submit</button>
+      <label id="user_name_id" ng-model="chat_user">{{chat_user}}:</label><input ng-model="TextInput" /><button>Submit</button>
     </form>
     <!--all move into the controller.js
     <script>

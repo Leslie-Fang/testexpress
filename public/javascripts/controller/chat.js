@@ -15,7 +15,12 @@ app.controller('chat', ['$scope','$rootScope','$http','$cookies',function($scope
     //clear the input 
     $scope.TextInput='';
     //in the backend listening to this event in the www file
-  }
+  };
+
+  socket.on('user name',function(msg){
+    $('#user_name_id').text(msg);
+  });
+
   //jquery is also able to be called
   socket.on('chat message', function(msg){
       $('#messages').append($('<li>').text(msg));
@@ -25,7 +30,6 @@ app.controller('chat', ['$scope','$rootScope','$http','$cookies',function($scope
   socket.on('user number change', function(msg){
       //test if catch the event
       //$('#messages').append($('<li>').text(msg));
-
       //unable to use ecope to change angular model in socket.on
       //$rootScope.chat_number = msg;
       //but able to use jquery in the socket.on to change 

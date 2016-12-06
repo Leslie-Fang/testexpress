@@ -3,7 +3,6 @@
 /**
  * Module dependencies.
  */
-
 var app = require('../app');
 var debug = require('debug')('myapp:server');
 var http = require('http');
@@ -42,6 +41,7 @@ io.use(sharedsession(app.session));
 //user_number to count the number connect to the 
 var user_number=0;
 io.on('connection', function(socket){
+  //this socket object belong to specific user
   console.log('a user connected');
   console.log(socket.handshake.session.user);
  // console.log(socket);
@@ -50,24 +50,42 @@ io.on('connection', function(socket){
   //change user numbers and emit the event
   user_number = user_number + 1;
  // console.log(user_number);
-
- /* redis_client.hexists("user_session_id",socket.handshake.sessionID,function(err, replies){
+  if(socket.handshake.session.islogin)
+  {
+    //already login
+    io.emit('user name',socket.handshake.session.user);
+  }
+  else
+  {
+    //not login yet
+    redis_client.hexists("user_session_id",socket.handshake.sessionID,function(err, replies){
     if(replies == 0){
       //if new user, user-agent not exist in the hashmap
       //then set the uaer-agent and the user-id
-      redis_client.hset("user_session_id",socket.handshake.sessionID,user_number);
+      var a = new Number(Math.round(Math.random() * 100000000));
+      redis_client.hset("user_session_id",socket.handshake.sessionID,a.toString());
+
+      socket.handshake.session.user = "游客"+a;
+      io.emit('user name',socket.handshake.session.user);
       //redis_client.hset("user_id_ua",user_id_number,ua);
       //console.log("hexists_judge" + user_id_number);
     }
     else{
       console.log(replies);
+      redis_client.hget("user_session_id",socket.handshake.sessionID,function(err, replies){
+        console.log(replies);
+        console.log("!!!!");
+        socket.handshake.session.user = "游客"+replies;
+        io.emit('user name',socket.handshake.session.user);
+      });
       //console.log("hexists_judge" + user_id_number);
     }
-  });*/
-
+  });
+  }
+ // io.emit('user name',socket.handshake.session.user);
   io.emit('user number change', user_number);
- // redis_client.set("blue","uil");
- // app.rclient.set("bule","success_again");
+  //redis_client.set("blue","uil");
+  //app.rclient.set("bule","success_again");
   //console.log(app.rclient);
   /*
   //this jquery method has been removed

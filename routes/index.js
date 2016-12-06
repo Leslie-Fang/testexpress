@@ -10,7 +10,7 @@ var global_data=require('../database/global');
 var redis_client=require('../database/redis_api');
 
 //the router in other files such as the signup.js also would pass this router
-user_id_number = 0;
+//user_id_number = 0;
 
 router.use(function(req,res,next){
 	console.log("welcome!");
@@ -18,8 +18,9 @@ router.use(function(req,res,next){
   console.log('%s,%s',req.method,req.path);
   //console.log(app);
   //console.log(redis);
-  console.log(global_data);
+  //console.log(global_data);
 
+/*
   //test local redis
   //redis_client.set("blue","success_again");
 
@@ -43,7 +44,7 @@ router.use(function(req,res,next){
       console.log(replies);
       console.log("hexists_judge" + user_id_number);
     }
-  });
+  });*/
 
   //test hkeys
   /*redis_client.hkeys("myhash",function(err, replies){
