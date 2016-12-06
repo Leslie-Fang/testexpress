@@ -18,7 +18,13 @@ app.controller('chat', ['$scope','$rootScope','$http','$cookies',function($scope
   };
 
   socket.on('user name',function(msg){
-    $('#user_name_id').text(msg);
+    //shouldn't change the label's text
+    //it would render all the pages
+    //$('#user_name_id').text(msg);
+
+    // the only way is to use angular and rewrite the socket.on function
+    $scope.chat_user = msg;
+    $scope.$apply();
   });
 
   //jquery is also able to be called

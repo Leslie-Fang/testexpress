@@ -39,6 +39,8 @@ var io = require('socket.io')(server);
 io.use(sharedsession(app.session));
 
 //user_number to count the number connect to the 
+
+
 var user_number=0;
 io.on('connection', function(socket){
   //this socket object belong to specific user
@@ -53,7 +55,9 @@ io.on('connection', function(socket){
   if(socket.handshake.session.islogin)
   {
     //already login
-    io.emit('user name',socket.handshake.session.user);
+    //socket.emit   emit event to current socket
+    //io.emit emit event to all the socket
+    socket.emit('user name',socket.handshake.session.user);
   }
   else
   {
@@ -66,7 +70,7 @@ io.on('connection', function(socket){
       redis_client.hset("user_session_id",socket.handshake.sessionID,a.toString());
 
       socket.handshake.session.user = "游客"+a;
-      io.emit('user name',socket.handshake.session.user);
+      socket.emit('user name',socket.handshake.session.user);
       //redis_client.hset("user_id_ua",user_id_number,ua);
       //console.log("hexists_judge" + user_id_number);
     }
@@ -75,8 +79,8 @@ io.on('connection', function(socket){
       redis_client.hget("user_session_id",socket.handshake.sessionID,function(err, replies){
         console.log(replies);
         console.log("!!!!");
-        socket.handshake.session.user = "游客"+replies;
-        io.emit('user name',socket.handshake.session.user);
+        socket.handshake.session.user = "游客"+"hget";
+        socket.emit('user name',socket.handshake.session.user);
       });
       //console.log("hexists_judge" + user_id_number);
     }
