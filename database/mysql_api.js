@@ -41,7 +41,7 @@ exports.login=function(req, res){
 		  /*set the cookie
 			the maxage is the cookies's expire time
 			after expire need to login again*/
-			res.cookie('user_name', req.param('username'), {maxAge: 60*1000});
+			res.cookie('user_name', req.param('username'), {maxAge: 60*60*1000});
 			req.session.user = req.param('username');
 			//set the username after login
 			//login_user=req.param('username');

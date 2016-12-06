@@ -27,6 +27,11 @@
 	  .headerlink a:hover{
 		color:#222;
 	  }
+	  .headerlink .user_count{
+		text-align:right;
+		margin-left: 6px;
+		margin-right: 6px;
+	  }
 
 	  .hint{
 		min-height:20px; 

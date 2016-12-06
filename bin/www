@@ -16,6 +16,8 @@ var sharedsession = require("express-socket.io-session");
  * Get port from environment and store in Express.
  */
 
+ //use redis to log data
+
 var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
@@ -35,10 +37,19 @@ var io = require('socket.io')(server);
 //connect session and socket.session
 io.use(sharedsession(app.session));
 
+//user_number to count the number connect to the 
+var user_number=0;
 io.on('connection', function(socket){
   console.log('a user connected');
   console.log(socket.handshake.session.user);
 
+  //change user numbers and emit the event
+  user_number = user_number+1;
+  console.log(user_number);
+  io.emit('user number change', user_number);
+ // redis_client.set("blue","uil");
+ // app.rclient.set("bule","success_again");
+  //console.log(app.rclient);
   /*
   //this jquery method has been removed
   socket.on('chat message', function(msg){
@@ -59,6 +70,10 @@ io.on('connection', function(socket){
 
   socket.on('disconnect', function(){
     console.log('user disconnected');
+    user_number=user_number-1;
+    if(user_number < 0)
+     {user_number = 0;}
+    io.emit('user number change', user_number);
   });
 });
 

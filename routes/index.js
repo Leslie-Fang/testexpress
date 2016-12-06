@@ -5,10 +5,7 @@ var util = require('util');
 var fs = require('fs');
 var my=require('../database/mysql_api');
 var cookieParser = require('cookie-parser');
-
-var redis= require('redis');
-var redis_db=redis.createClient();
-
+var app = require('../app');
 //app load from app.js file, couldn't redefine app
 //var app = require('../app');
 //var users = require('./users');
@@ -17,6 +14,10 @@ var redis_db=redis.createClient();
 //basic router, here every request would pass this router
 //router.use('/users', users);
 //router.use('/get', get);
+
+//var redis = require('redis');
+//var redis_client = redis.createClient();
+
 
 //the router in other files such as the signup.js also would pass this router
 router.user_number = 0;
@@ -32,7 +33,7 @@ router.use(function(req,res,next){
   else{
     //also set cookie here in the first time
     //username in the cookie would be used in the front-end
-    res.cookie('user_name', '游客', {maxAge: 60*1000});
+    res.cookie('user_name', '游客', {maxAge: 60*60*1000});
   }
 
   // 检查 session 中的 isVisit 字段
@@ -49,8 +50,10 @@ router.use(function(req,res,next){
     //init set time -1, only avaiable in this window
   }
 
-  //redis_db.set("red","success");
+  //test local redis
+//  redis_client.set("blue","success_again");
   next();
+  
   //console.log(req.Type());
   //signup page would be affected by the login controller
   /*if(req.path == '/signup'){

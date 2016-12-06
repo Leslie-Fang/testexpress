@@ -14,6 +14,10 @@ var ejs = require('ejs');
 
 var app = express();
 
+//var redis = require('redis');
+//var redis_client = redis.createClient();
+//app.rclient = redis_client;
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 //app.set('view engine', 'jade');
