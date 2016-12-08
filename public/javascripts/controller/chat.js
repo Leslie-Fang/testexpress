@@ -42,4 +42,16 @@ app.controller('chat', ['$scope','$rootScope','$http','$cookies',function($scope
       $('h3').text('当前在线人数:' + msg);
   });
 
+  $scope.send_pic = function(){
+    if ($cookies.get('islogin')){
+      //if is login, able to send pic else not able to send pic
+        $scope.TextInput = $cookies.get('islogin');
+    }
+    else{
+      //unlogin unable to send pic
+      //$scope.TextInput = $cookies.get('user_name');
+        alert("please login first!");
+    }
+  };
+
 }]);
