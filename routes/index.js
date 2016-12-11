@@ -130,6 +130,10 @@ router.get('/mysqltest/',function(req, res, next){
     res.send('create successfully!');
 });
 
+router.get('/uiboot/',function(req, res, next){
+    res.render('uibootstrap');
+});
+
 router.post('/uploadimage/',function(req, res, next){
 	//生成multiparty对象，并配置上传目标路径
     var form = new multiparty.Form({uploadDir: './upload'});

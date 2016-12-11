@@ -58,3 +58,9 @@ h2 span{
 text-align:right;	
 color: black;		
 }
+
+my-foot{
+	bottom: 0;
+	right:10px;
+	position: fixed;
+}

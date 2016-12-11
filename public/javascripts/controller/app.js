@@ -16,14 +16,15 @@ app.controller('login', function($scope,$http) {
                 username	:	username,
                 password	:	password
             }
-        }).success(function(data) {
-               if(data.state){
+        }).then(
+          function successCallback(response) {
+               if(response.data.state){
                    //$scope.loginstate='hi,'+$scope.username;
                    $scope.copy_username = $scope.username;
                   // $rootScope.user=$scope.username;
                    //$rootScope
-				  // window.location = "http://www.baidu.com";//successfully, nav to a outside web page
-				           window.location="/main";//successfully nav to a page in the project
+          // window.location = "http://www.baidu.com";//successfully, nav to a outside web page
+                   window.location="/main";//successfully nav to a page in the project
                    alert("登入成功!");
                    //$scope.username=data.username;
                }else {
@@ -31,8 +32,11 @@ app.controller('login', function($scope,$http) {
                 }
                 //window.location="#/upload"
                 //location.reload();
-            });
-    }
+            },
+            function errorCallback(response){
+              alert("post response wrong");}
+          )
+      }
     
 });
 app.controller('regist', function($scope,$http) {
@@ -44,18 +48,32 @@ app.controller('regist', function($scope,$http) {
                 username  : username,
                 password  : password
             }
-        }).success(function(data) {
-               if(data.state){
-                   $scope.loginstate='yes';
-                   window.location="/login";
-                   alert("欢迎注册，登入之后可以看到更多内容!");
+        }).then(
+            function successCallback(response) {
+               if(response.data.state){
+                   //$scope.loginstate='hi,'+$scope.username;
+                   $scope.copy_username = $scope.username;
+                  // $rootScope.user=$scope.username;
+                   //$rootScope
+          // window.location = "http://www.baidu.com";//successfully, nav to a outside web page
+                   window.location="/main";//successfully nav to a page in the project
+                   alert("注册成功!");
                    //$scope.username=data.username;
                }else {
-                    alert("注册失败!");
-                }
-              //  window.location="/#/view/manage"
-               // location.reload();
-            });
+                    alert("用户名或密码错误！");
+              }
+                //window.location="#/upload"
+                //location.reload();
+            },
+            function errorCallback(response){
+              alert("post response wrong");}
+            )
     }
   });
+app.controller('index', function($scope,$http) {
+    
+});
+app.controller('main', function($scope,$http) {
+    
+});
 //document.write('<script src="javascripts/controller/logandreg.js"></script>');
