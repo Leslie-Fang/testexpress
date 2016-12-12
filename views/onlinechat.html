@@ -3,7 +3,7 @@
   <head>
     <title>Online Chat Room</title>
     
-   <!-- <link rel="stylesheet" href="css/bootstrap.css">-->
+   <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/chat.css">
 
     <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
@@ -20,10 +20,10 @@
 
   <!--load in the cache used to in the directive or other components' templateUrl-->
     <script type="text/ng-template" id="sendpic.html">
-      <p>upload file</p>
+      <p>Choose picture</p>
       <form action="/uploadimage" method="post" enctype="multipart/form-data" ngmodel="dest">
-        <input type="file" name="file1" /> <br>
-        <input type="submit" value="Submit" />
+        <input type="file" name="file1" value="Picture"/> <br>
+        <input type="submit" value="Send" />
       </form>
       <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
     </script>
@@ -35,10 +35,9 @@
         <li ><a ng-href="/login">登入</a></li>
         <li ><a ng-href="/signup">注册</a></li>
       </ul>
-      <div class="user_count">
-        <h3 ng-model="chat_number">当前在线人数:{{chat_number}}</h3>
-      </div>
+      <h3 ng-model="chat_number" class="user_count">当前在线人数:{{chat_number}}</h3>
     </div>
+
     <div class="hint">
       <h1 ng-model="Hint">{{Hint}}</h1>
     </div>
