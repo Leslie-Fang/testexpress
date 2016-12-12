@@ -21,9 +21,6 @@ app.controller('login', function($scope,$http) {
                if(response.data.state){
                    //$scope.loginstate='hi,'+$scope.username;
                    $scope.copy_username = $scope.username;
-                  // $rootScope.user=$scope.username;
-                   //$rootScope
-          // window.location = "http://www.baidu.com";//successfully, nav to a outside web page
                    window.location="/main";//successfully nav to a page in the project
                    alert("登入成功!");
                    //$scope.username=data.username;
@@ -41,7 +38,7 @@ app.controller('login', function($scope,$http) {
 });
 app.controller('regist', function($scope,$http) {
   $scope.send=function(username,password) {
-        $http({
+      $http({
             url:'/signup',
             method:'post',
             data:{
@@ -49,25 +46,23 @@ app.controller('regist', function($scope,$http) {
                 password  : password
             }
         }).then(
-            function successCallback(response) {
-               if(response.data.state){
-                   //$scope.loginstate='hi,'+$scope.username;
-                   $scope.copy_username = $scope.username;
-                  // $rootScope.user=$scope.username;
-                   //$rootScope
-          // window.location = "http://www.baidu.com";//successfully, nav to a outside web page
-                   window.location="/main";//successfully nav to a page in the project
-                   alert("注册成功!");
-                   //$scope.username=data.username;
-               }else {
-                    alert("用户名或密码错误！");
-              }
-                //window.location="#/upload"
-                //location.reload();
-            },
-            function errorCallback(response){
-              alert("post response wrong");}
-            )
+                function successCallback(response) {
+                   if(response.data.state){
+                       //$scope.loginstate='hi,'+$scope.username;
+                       $scope.copy_username = $scope.username;
+                       // window.location = "http://www.baidu.com";//successfully, nav to a outside web page
+                       window.location="/main";//successfully nav to a page in the project
+                       alert("注册成功!");
+                       //$scope.username=data.username;
+                   }else {
+                        alert("用户名或密码错误！");
+                  }
+                    //window.location="#/upload"
+                    //location.reload();
+                },
+                function errorCallback(response){
+                  alert("post response wrong");}
+              )
     }
   });
 app.controller('index', function($scope,$http) {

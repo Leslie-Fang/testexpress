@@ -131,11 +131,11 @@ router.get('/mysqltest/',function(req, res, next){
 });
 
 router.get('/uiboot/',function(req, res, next){
-    res.render('uibootstrap');
+    res.render('modaltest');
 });
 
 router.post('/uploadimage/',function(req, res, next){
-	//生成multiparty对象，并配置上传目标路径
+	  //生成multiparty对象，并配置上传目标路径
     var form = new multiparty.Form({uploadDir: './upload'});
     //上传完成后处理
     form.parse(req, function(err, fields, files) {

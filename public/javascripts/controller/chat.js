@@ -1,13 +1,15 @@
 //here add the ngCookies module
 //use the cookie take the login control in the frontend
-var app = angular.module("chatapp", ['ngCookies']);
+var app = angular.module("chatapp", ['ngCookies','ngAnimate', 'ngSanitize', 'ui.bootstrap']);
 
-app.controller('chat', ['$scope','$rootScope','$http','$cookies',function($scope,$rootScope,$http,$cookies) {
+app.controller('chat', ['$scope','$rootScope','$http','$cookies','$uibModal',function($scope,$rootScope,$http,$cookies,$uibModal) {
   $scope.Hint = "Online Chat Room";
   $scope.chat_number = 0;
   //use the cookie to get username and set the login control in the frontend
   //var use = $cookies.get('user_name');
   $scope.chat_user = $cookies.get('user_name');
+  
+  $scope.dest = "default";
 
   var socket = io();
   $scope.send=function(TextInput){
@@ -43,15 +45,41 @@ app.controller('chat', ['$scope','$rootScope','$http','$cookies',function($scope
   });
 
   $scope.send_pic = function(){
+
+    var modalInstance = $uibModal.open({
+      animation: true,
+      ariaLabelledBy: 'modal-title',
+      ariaDescribedBy: 'modal-body',
+      templateUrl: 'sendpic.html',
+      controller: 'sendPicCtrl',
+    //  controllerAs: '$ctrl',
+      size: 'lg',
+     // appendTo: parentElem,
+     /* resolve: {
+        items: function () {
+          return $ctrl.items;
+        }
+      }*/
+    });
+    /*//here add login control, only login user could send pic
     if ($cookies.get('islogin')){
       //if is login, able to send pic else not able to send pic
-        $scope.TextInput = $cookies.get('islogin');
+      //  $scope.TextInput = $cookies.get('islogin');
+
     }
     else{
       //unlogin unable to send pic
       //$scope.TextInput = $cookies.get('user_name');
         alert("please login first!");
-    }
+    }*/
+  };
+
+}]);
+
+app.controller('sendPicCtrl',['$scope','$uibModalInstance',function($scope,$uibModalInstance){
+  $scope.ok = function () {
+    $uibModalInstance.close();
+  // alert('hh');
   };
 
 }]);
