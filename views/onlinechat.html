@@ -22,10 +22,11 @@
     <script type="text/ng-template" id="sendpic.html">
       <p>Choose picture</p>
       <form action="/uploadimage" method="post" enctype="multipart/form-data" ngmodel="dest">
-        <input type="file" name="file1" value="Picture"/> <br>
+        <input type="file" name="file1" /> <br>
         <input type="submit" value="Send" />
       </form>
       <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+      <button class="btn btn-primary" type="button" ng-click="dismiss()">Close</button>
     </script>
 
 
